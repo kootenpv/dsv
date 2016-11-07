@@ -10,11 +10,13 @@ Read/write automagically "Delimiter" Seperated Value files. The delimiter will b
 
 Functionality:
 
-    import dsv
-    obj = ["1", "2", "3"]
-    dsv.write(obj, "fname.csv")
-    new_obj = dsv.read(obj, "fname.csv")
-    assert obj == new_obj
+```python
+import dsv
+obj = ["1", "2", "3"]
+dsv.write(obj, "fname.csv")
+new_obj = dsv.read(obj, "fname.csv")
+assert obj == new_obj
+```
 
 It supports iterative read as well using `iread`.
 
