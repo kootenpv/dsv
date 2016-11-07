@@ -11,7 +11,7 @@ import types
 import csv
 
 __project__ = "dsv"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 DELIMS = [",", "\t", " ", ";", "|", ":"]
 

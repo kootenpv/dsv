@@ -1,6 +1,7 @@
 ## dsv
 
 [![Build Status](https://travis-ci.org/kootenpv/dsv.svg?branch=master)](https://travis-ci.org/kootenpv/dsv)
+[![Coverage Status](https://coveralls.io/repos/github/kootenpv/dsv/badge.svg?branch=master)](https://coveralls.io/github/kootenpv/dsv?branch=master)
 [![PyPI](https://img.shields.io/pypi/v/dsv.svg?style=flat-square)](https://pypi.python.org/pypi/dsv/)
 [![PyPI](https://img.shields.io/pypi/pyversions/dsv.svg?style=flat-square)](https://pypi.python.org/pypi/dsv/)
 
