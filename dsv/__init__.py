@@ -13,7 +13,7 @@ import csv
 __project__ = "dsv"
 __version__ = "0.0.3"
 
-DELIMS = [",", "\t", " ", ";", "|", ":"]
+DELIMS = [",", "\t", ";", " ", "|", ":"]
 
 
 def take(csvfile, n=100):
