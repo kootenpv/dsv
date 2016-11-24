@@ -11,7 +11,7 @@ import types
 import csv
 
 __project__ = "dsv"
-__version__ = "0.0.3"
+__version__ = "0.0.5"
 
 DELIMS = [",", "\t", ";", " ", "|", ":"]
 
@@ -67,19 +67,22 @@ def add_delimiter(lines, dialect):
 
 def sniff_dialect(fname):
     dialect = {"delimiter": None, "doublequote": False, "quotechar": '"',
-               "quoting": False, "skipinitialspace": False,
+               "quoting": csv.QUOTE_MINIMAL, "skipinitialspace": False,
                "fname": fname, "lineterminator": "\n", "num_cols": -1,
-               "test_n": 10}
+               "test_n": 10, "strict": False}
     with open(fname) as csvfile:
         lines = take(csvfile)
         dialect["newline"] = "\r\n" if any([x.endswith("\r\n") for x in lines]) else "\n"
         dialect["doublequote"] = any(['""' in x for x in lines])
-        dialect["quoting"] = has_quotes(lines)
+        #dialect["quoting"] = has_quotes(lines)
         add_delimiter(lines, dialect)
         if dialect["delimiter"] is None:
             msg = "{}: cannot find equally occuring delimiter among lines".format(fname)
             raise ValueError(msg)
         detect_problem_lines(lines[:-dialect["test_n"]], dialect)
+        # print(dialect)
+        dialect = {k: dialect[k] for k in ["delimiter", "doublequote",
+                                           "lineterminator", "quotechar", "quoting", "skipinitialspace", "strict"]}
         return dialect
 
 
@@ -124,14 +127,16 @@ def write(obj, fname):
 
 def iread(fname):
     dialect = sniff_dialect(fname)
+    csv.register_dialect("just.custom", **dialect)
     with open(fname) as csvfile:
-        reader = csv.reader(csvfile, dialect)
+        reader = csv.reader(csvfile, "just.custom")
         for line in reader:
             yield line
 
 
 def read(fname):
     dialect = sniff_dialect(fname)
+    csv.register_dialect("just.custom", **dialect)
     with open(fname) as csvfile:
-        reader = csv.reader(csvfile, dialect)
+        reader = csv.reader(csvfile, "just.custom")
         return list(reader)
