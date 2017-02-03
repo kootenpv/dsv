@@ -11,7 +11,7 @@ import types
 import csv
 
 __project__ = "dsv"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 DELIMS = [",", "\t", ";", " ", "|", ":"]
 
@@ -123,6 +123,8 @@ def write(obj, fname):
         write_dict(obj, fname)
     elif isinstance(obj[-1], list):
         write_list(obj, fname)
+    else:
+        raise TypeError("No support for writing", type(obj[-1]))
 
 
 def iread(fname):
